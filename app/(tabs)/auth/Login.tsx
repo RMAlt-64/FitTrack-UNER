@@ -4,26 +4,37 @@ import { View, Text } from '@/components/Themed';
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from '@expo/vector-icons';
 
-
-
 import Colors from "@/constants/Colors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Login() {
+  const [error, setError] = useState<string | undefined>(undefined);
+  const [email, setEmail] = useState<string | undefined>(undefined);
+  const [password, setPassword] = useState<string | undefined>(undefined);
+  const [showPassword, setShowPassword] = useState<boolean>(true);
+  const [isEnabled, setIsEnabled] = useState<boolean>(true);
 
-  const [email, setEmail] = useState<string | undefined>("");
-  const [password, setPassword] = useState<string | undefined>("");
-  const [showPassword, setShowPassword] = useState(true);
+
 
 
   const handleLogin = () => {
     console.log(email);
     console.log(password);
-    setEmail("");
-    setPassword("");
-  }
+    setEmail(undefined);
+    setPassword(undefined);
+    if (!email || !password) {
+      setError ('Debe completar los campos');
+      return
+    }
+  };
 
+  useEffect (()=>{
+    setIsEnabled(email !== undefined  && password !== undefined);
+    
+  }, [email,password]);
 
+  
+  
   return (
 
     <View style={styles.main_container}>
@@ -34,6 +45,7 @@ export default function Login() {
       <View style={styles.card}>
         <View style={styles.boxText}>
           <TextInput
+          keyboardType="email-address"
           placeholder="correo@email.com"
           value={email}
           onChangeText={setEmail}
@@ -54,20 +66,18 @@ export default function Login() {
               color="gray"
             ></Ionicons>
           </TouchableOpacity>
-          
+        
           
         </View>
         <View style={styles.fatherButton}>
-          <TouchableOpacity onPress={handleLogin} style={styles.submit}>
-            <Text style={{color:'#ffffff'}}>Sign in</Text>
+          {error && <Text style={styles.error}>{error}</Text>}
+          <TouchableOpacity onPress={handleLogin} disabled={!isEnabled} style={ isEnabled ? styles.submit : styles.isdisabledSubmit }>
+            <Text style={{color:'#ffffff'}} >Sign in</Text>
           </TouchableOpacity>
 
         </View>
       </View>
-
-
     </View>
-
   )
 }
 
@@ -137,6 +147,19 @@ const styles = StyleSheet.create({
     width: 150,
     margin: 20,
   },
+  isdisabledSubmit: {
+    alignItems: 'center',
+    backgroundColor: Colors.buttonColorDisabled,
+    borderRadius: 30,
+    paddingVertical: 20,
+    width: 150,
+    margin: 20,
+  },
+  error:{
+    color:"red",
+    fontSize:12
+  }
+  
 
 
 })

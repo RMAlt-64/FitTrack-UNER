@@ -17,6 +17,7 @@ export default {
     tabIconSelected: tintColorDark,
   },
   buttonColor: '#4A4947',
-  colorDeFondoPrincipal: '#FAF7F0'
+  colorDeFondoPrincipal: '#FAF7F0',
+  buttonColorDisabled: '#D34848'
 
 };
