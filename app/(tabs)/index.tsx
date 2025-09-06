@@ -7,9 +7,8 @@ export default function TabOneScreen() {
   return (
     <View style={styles.container}>
       
-      
-      <Text>Hola Mundo!!!</Text>
-      
+      <Text>Hola soy Ruben</Text>
+     
       
     </View>
   );
