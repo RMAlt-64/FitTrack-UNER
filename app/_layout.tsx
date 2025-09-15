@@ -51,7 +51,9 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        
+        <Stack.Screen name='Home'>
+          
+        </Stack.Screen>
       </Stack>
     </ThemeProvider>
   );

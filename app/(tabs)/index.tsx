@@ -1,18 +1,22 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet,  Button, TextInput,  View, TouchableOpacity, Text } from 'react-native';
+import { Formik } from 'formik';
+
+import Colors from "@/constants/Colors";
+import { useEffect, useState } from 'react';
 
 
-import { Text, View } from '@/components/Themed';
-
-export default function TabOneScreen() {
-  return (
+export default function App() {
+  return(
     <View style={styles.container}>
-      
-      <Text>Hola soy Ruben</Text>
-     
-      
+      <Text style={styles.input}>Hola Mundo</Text>
+      <TouchableOpacity>
+        <Text style={styles.button}>Button</Text>
+      </TouchableOpacity>
     </View>
-  );
+  )
 }
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -20,13 +24,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  input: {
+    backgroundColor: "#ffffff",
+    width: 250, 
+    margin: 15,
+    borderRadius:25
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  textoEntrada: {
+
   },
+  button: {
+    width: 100,
+    borderRadius: 40,
+    backgroundColor: Colors.buttonColor
+  }
+
 });
