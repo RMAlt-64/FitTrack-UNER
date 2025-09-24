@@ -1,13 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, TextInput, Button, ScrollView, TouchableOpacity, Text } from 'react-native';
-
-
+import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Text } from 'react-native';
+import * as Yup from 'yup';
+import { Link } from 'expo-router';
 import { Formik } from 'formik';
 
 import Colors from "@/constants/Colors";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
-
 
 
 
@@ -19,33 +17,48 @@ interface IFormValues {
   password: string
 }
 
+const formValidationSchema = Yup.object().shape({
+  name: Yup.string()
+    .max(15, 'Must be 15 characters or less')
+    .required('Campo obligatorio'),
+  lastname: Yup.string()
+    .max(20, 'Must be 20 characters or less')
+    .required('Campo obligatorio'),
+  email: Yup.string().email('Invalid email address').required('Campo obligatorio'),
+  phone: Yup.string()
+  .matches(/^[0-9]+$/, 'El número de teléfono solo debe contener dígitos numericos')
+  
+  .required('Campo obligatorio'),
+  password: Yup.string()
+  .required('Campo obligatorio')
+ 
+});
+
 export default function SingUp() {
+  
 
-
-  const handleSubmit = (values: IFormValues) => {
+  const handleSubmit = (values: IFormValues, { resetForm }: { resetForm: () => void }) => { 
+    
     console.log(values.name)
     console.log(values.lastname)
     console.log(values.email)
     console.log(values.phone)
-    values.name= "";
-    values.email= "";
-    values.lastname= "";
-    values.phone= "";
-    values.password="";
-   
-
-
+    resetForm()
   }
+  
   return (
+
+   
       <ScrollView>
         <Formik
           initialValues={{
             name: "",
             email: "",
             lastname: "",
-            phone: "",
+            phone:"" ,
             password: ""
           }}
+          validationSchema={formValidationSchema}
           onSubmit={handleSubmit}
         >
           {({
@@ -55,6 +68,9 @@ export default function SingUp() {
             handleReset,
             isSubmitting,
             values,
+            errors,
+            touched 
+            
           }) => (
             <View style={styles.main_container}>
               <View style={styles.icon}>
@@ -68,19 +84,24 @@ export default function SingUp() {
                     onBlur={handleBlur("name")}
                     value={values.name}
                     placeholder="Your Name"
-                    style={styles.input}
-                  />
+                    autoFocus={true}
+                  ></TextInput> 
                 </View>
+                {errors.name && touched.name ? (
+                    <Text style={styles.errorText}>{errors.name}</Text>
+                  ) : null}
 
                 <View style={styles.boxInput}>
                   <TextInput
                     onChangeText={handleChange("lastname")}
                     onBlur={handleBlur("lastname")}
                     value={values.lastname}
-                    placeholder="Your Lastname"
-                    style={styles.input}
-                  />
+                    placeholder="Your Lastname" 
+                  ></TextInput> 
                 </View>
+                {errors.lastname && touched.lastname ? (
+                      <Text style={styles.errorText}>{errors.lastname}</Text>
+                    ) : null}
 
                 <View style={styles.boxInput}>
                   <TextInput
@@ -89,45 +110,49 @@ export default function SingUp() {
                     value={values.phone}
                     placeholder="Your Phone Number"
                     keyboardType="phone-pad"
-                    style={styles.input}
-                  />
+                  ></TextInput> 
                 </View>
+                {errors.phone && touched.phone ? (
+                  <Text style={styles.errorText}>{errors.phone}</Text>
+                  ) : null}
 
                 <View style={styles.boxInput}>
-                  <TextInput
+                  <TextInput 
                     onChangeText={handleChange("email")}
                     onBlur={handleBlur("email")}
                     value={values.email}
                     placeholder="Email Address"
                     keyboardType="email-address"
-                    style={styles.input}
-                  />
+                    autoCapitalize="none"
+                  ></TextInput> 
                 </View>
+                {errors.email && touched.email ? <Text style={styles.errorText}>{errors.email}</Text> : null}  
                 <View style={styles.boxInput}>
                   <TextInput
                     onChangeText={handleChange("password")}
                     onBlur={handleBlur("password")}
                     value={values.password}
                     placeholder="Password"
-                    keyboardType="visible-password"
-                    style={styles.input}
-                  />
+                    secureTextEntry={true}
+                    autoCapitalize="none"
+                  ></TextInput>
                 </View>
+                {errors.password && touched.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
 
                 <View style={styles.fatherButton}>
+
                   <TouchableOpacity
-                    style={styles.button}
-                    onPress={handleSubmit}
-                    disabled={isSubmitting}
-                  > <Text style={styles.buttonText}>Submit</Text>
-                  </TouchableOpacity>
-               
-                
-                  <TouchableOpacity
-                    onPress={handleReset}
+                    onPress={() => handleReset()}
                     style={styles.button}
                     disabled={isSubmitting}
                   > <Text style={styles.buttonText}>Reset</Text>
+                  </TouchableOpacity>
+                  
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => handleSubmit()}
+                    disabled={isSubmitting}
+                  > <Text style={styles.buttonText}>Submit</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -136,10 +161,13 @@ export default function SingUp() {
         </Formik>
         <View >
           <TouchableOpacity style={styles.button}>
+            <Link href='/' style={{marginLeft: 10}}>
              <Text style={styles.buttonText}> At Home</Text>
+            </Link>
           </TouchableOpacity>
         </View>
       </ScrollView>
+    
     );
   }
 
@@ -152,15 +180,8 @@ export default function SingUp() {
       alignItems: "center",
       paddingTop: 50,
       backgroundColor: Colors.colorDeFondoPrincipal,
-
     },
 
-    error: {
-      margin: 8,
-      fontSize: 14,
-      color: 'red',
-      fontWeight: 'bold',
-    },
     boxInput: {
       paddingInline: 25,
       marginTop: 25,
@@ -168,23 +189,19 @@ export default function SingUp() {
       fontSize: 14,
       backgroundColor: '#D8D2C2',
       borderRadius: 30,
-      paddingVertical: 15,
-
-    },
-    input: {
-      
-    },
-    
+      paddingVertical: 15
+    }, 
     fatherButton: {
-      flex:1
+      flexDirection: "row",
+      justifyContent: "space-around",
+      marginVertical: 20,
     },
     button: {
       backgroundColor: Colors.buttonColor,
       borderRadius: 30,
       paddingVertical: 15,
       width: 150,
-      margin: 20,
-           
+      margin: 20,       
     },
     buttonText: {
       color: "#ffffff",
@@ -219,5 +236,11 @@ export default function SingUp() {
       borderRadius: 50,
       marginBottom: 15
     },
-   
+    errorText:{
+      color: "red",
+      fontSize: 12,
+      marginTop: 5,
+      marginLeft: 10,
+      fontWeight: "500",
+    }
   });

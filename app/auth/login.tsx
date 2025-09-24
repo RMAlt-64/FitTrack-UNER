@@ -3,6 +3,7 @@ import { StyleSheet, Image, TextInput, TouchableOpacity } from "react-native"
 import { View, Text } from '@/components/Themed';
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from '@expo/vector-icons';
+import { Link } from "expo-router";
 
 import Colors from "@/constants/Colors";
 import { useEffect, useState } from "react";
@@ -36,6 +37,7 @@ export default function Login() {
   
   
   return (
+    
 
     <View style={styles.main_container}>
       <StatusBar style="auto" />
@@ -66,15 +68,19 @@ export default function Login() {
               color="gray"
             ></Ionicons>
           </TouchableOpacity>
-        
-          
+    
         </View>
         <View style={styles.fatherButton}>
           {error && <Text style={styles.error}>{error}</Text>}
           <TouchableOpacity onPress={handleLogin} disabled={!isEnabled} style={ isEnabled ? styles.submit : styles.isdisabledSubmit }>
             <Text style={{color:'#ffffff'}} >Sign in</Text>
           </TouchableOpacity>
-
+          
+        </View>
+        <View>
+              <Link href="/" style={{marginLeft: 10}}>
+                <Text style={{color: Colors.light.text}}>Volver al Home</Text>
+              </Link>
         </View>
       </View>
     </View>
