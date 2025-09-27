@@ -15,13 +15,14 @@ function RootLayoutNav() {
   return (
 
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(drawer)" options={{headerTitle:"Drawer"}}/>
+        
         <Stack.Screen name="index" options={{headerTitle:"Home"}}/>
-        <Stack.Screen name="profile" options={{headerTitle: false}}/>
+        <Stack.Screen name="profile" options={{headerTitle: "profile"}}/>
         <Stack.Screen name="users/index" options={{headerTitle: false,}}/>
         <Stack.Screen name="users/[userId]" options={{headerTitle: false}}/>
         <Stack.Screen name="settings" options={{headerTitle: "Settings"}}/>
         <Stack.Screen name="not-found" options={{headerTitle: "Oops!"}}/>
+        <Stack.Screen name="(drawer)" options={{headerTitle:"Drawer"}}/>
       </Stack>
   )
 }
