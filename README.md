@@ -1,8 +1,8 @@
-# FitTrack - App de Registro y Perfil de Usuario
+# FitTrack - UNER 
 
 ## Descripción
 
-FitTrack es una aplicación móvil desarrollada con **React Native y Expo Router**, diseñada para gestionar usuarios y su información personal. La aplicación incluye un sistema de navegación tipo **Drawer (menú hamburguesa)** para moverse entre las distintas pantallas.
+FitTrack UNER es una aplicación móvil que permitirá a los usuarios registrar sus caminatas o entrenamientos al aire libre, visualizando la ruta recorrida en un mapa, tomando fotos durante la actividad y recibiendo recordatorios para ejercitarse.
 
 ### Pantallas creadas:
 
