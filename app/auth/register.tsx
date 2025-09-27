@@ -145,15 +145,13 @@ export default function SingUp() {
                     onPress={() => handleReset()}
                     style={styles.button}
                     disabled={isSubmitting}
-                  > <Text style={styles.buttonText}>Reset</Text>
-                  </TouchableOpacity>
+                  ><Text style={styles.buttonText}>Reset</Text></TouchableOpacity>
                   
                   <TouchableOpacity
                     style={styles.button}
                     onPress={() => handleSubmit()}
                     disabled={isSubmitting}
-                  > <Text style={styles.buttonText}>Submit</Text>
-                  </TouchableOpacity>
+                  ><Text style={styles.buttonText}>Submit</Text></TouchableOpacity>
                 </View>
               </View>
             </View>

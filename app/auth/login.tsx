@@ -4,11 +4,19 @@ import { View, Text } from '@/components/Themed';
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from "expo-router";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "expo-router";
+
+
 
 import Colors from "@/constants/Colors";
 import { useEffect, useState } from "react";
 
-export default function Login() {
+export default function LoginScreen() {
+  const { login } = useAuth();
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+
   const [error, setError] = useState<string | undefined>(undefined);
   const [email, setEmail] = useState<string | undefined>(undefined);
   const [password, setPassword] = useState<string | undefined>(undefined);
@@ -19,6 +27,8 @@ export default function Login() {
 
 
   const handleLogin = () => {
+    login(username);
+    router.replace("/");
     console.log(email);
     console.log(password);
     setEmail(undefined);
@@ -75,13 +85,14 @@ export default function Login() {
           <TouchableOpacity onPress={handleLogin} disabled={!isEnabled} style={ isEnabled ? styles.submit : styles.isdisabledSubmit }>
             <Text style={{color:'#ffffff'}} >Sign in</Text>
           </TouchableOpacity>
-          
-        </View>
-        <View>
-              <Link href="/" style={{marginLeft: 10}}>
-                <Text style={{color: Colors.light.text}}>Volver al Home</Text>
-              </Link>
-        </View>
+        </View> 
+      </View>
+      <View >
+        <TouchableOpacity style={styles.button}>
+          <Link href='/' style={{marginLeft: 10}}>
+              <Text style={styles.buttonText}> At Home</Text>
+          </Link>
+        </TouchableOpacity>
       </View>
     </View>
   )
@@ -119,6 +130,13 @@ const styles = StyleSheet.create({
     elevation: 5
 
   },
+  button: {
+        backgroundColor: Colors.buttonColor,
+        borderRadius: 30,
+        paddingVertical: 15,
+        width: 150,
+        margin: 20,       
+      },
   boxText: {
     paddingVertical: 20,
     backgroundColor: '#D8D2C2',
@@ -136,6 +154,17 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingHorizontal: 20
   },
+  buttonText: {
+      color: "#ffffff",
+      fontSize: 16,
+      fontWeight: "bold",
+      marginVertical:10,
+      justifyContent:"center",
+      marginHorizontal: 35,
+      textAlign:"center"
+    },
+   
+ 
   textInput:{
     flex: 1, 
     padding: 10,
