@@ -1,53 +1,66 @@
-import {GestureHandlerRootView} from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export default function DrawerLayout() {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
         screenOptions={{
           headerStyle: { backgroundColor: "#6200ee" },
           headerTintColor: "#fff",
           drawerActiveTintColor: "#6200ee",
           drawerLabelStyle: { fontSize: 16 },
-          
-          
         }}
       >
-      <Drawer.Screen
-        name="index"
-        options={{
-          headerShown: true,
-          drawerLabel: "Inicio",
-          title: "Inicio",
-          drawerIcon: ({ color, size }) => (
-            <MaterialIcons name="home" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="profile"
-        options={{
-          headerShown: true,
-          drawerLabel: "Perfil",
-          title: "Perfil de Usuario",
-          drawerIcon: ({ color, size }) => (
-            <MaterialIcons name="person" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="settings"
-        options={{
-          headerShown: true,
-          drawerLabel: "Configuración",
-          title: "Configuración",
-          drawerIcon: ({ color, size }) => (
-            <MaterialIcons name="settings" size={size} color={color} />
-          ),
-        }}
-      />
+        <Drawer.Screen
+          name="map"
+          options={{
+            drawerLabel: "Mapa",
+            title: "Mapa",
+            drawerIcon: ({ color, size }) => (
+              <MaterialIcons name="map" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="record"
+          options={{
+            drawerLabel: "Caminar",
+            title: "Registrar Caminata",
+            drawerIcon: ({ color, size }) => (
+              <MaterialIcons name="directions-walk" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="camera"
+          options={{
+            drawerLabel: "Cámara",
+            title: "Cámara",
+            drawerIcon: ({ color, size }) => (
+              <MaterialIcons name="camera-alt" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="activities"
+          options={{
+            title: "Actividades",
+            drawerIcon: ({ color, size }) => (
+              <MaterialIcons name="history" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="weather"
+          options={{
+            title: "Clima",
+            drawerIcon: ({ color, size }) => (
+              <MaterialIcons name="wb-sunny" size={size} color={color} />
+            ),
+          }}
+        />
       </Drawer>
     </GestureHandlerRootView>
   );

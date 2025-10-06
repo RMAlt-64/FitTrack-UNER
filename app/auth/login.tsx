@@ -4,7 +4,7 @@ import { View, Text } from '@/components/Themed';
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from "expo-router";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "expo-router";
 
 
@@ -28,7 +28,7 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     login(username);
-    router.replace("/");
+    
     console.log(email);
     console.log(password);
     setEmail(undefined);
@@ -37,6 +37,8 @@ export default function LoginScreen() {
       setError ('Debe completar los campos');
       return
     }
+
+    router.replace("/home");
   };
 
   useEffect (()=>{
@@ -89,7 +91,7 @@ export default function LoginScreen() {
       </View>
       <View >
         <TouchableOpacity style={styles.button}>
-          <Link href='/' style={{marginLeft: 10}}>
+          <Link href='/home' style={{marginLeft: 10}}>
               <Text style={styles.buttonText}> At Home</Text>
           </Link>
         </TouchableOpacity>
@@ -194,7 +196,5 @@ const styles = StyleSheet.create({
     color:"red",
     fontSize:12
   }
-  
-
 
 })

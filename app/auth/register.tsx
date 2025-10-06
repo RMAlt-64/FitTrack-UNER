@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TextInput, ScrollView, TouchableOpacity, Text, Button } from 'react-native';
 import * as Yup from 'yup';
-import { Link } from 'expo-router';
+import { Link,useRouter } from 'expo-router';
 import { Formik } from 'formik';
+
 
 import Colors from "@/constants/Colors";
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -35,7 +36,7 @@ const formValidationSchema = Yup.object().shape({
 });
 
 export default function SingUp() {
-  
+  const router = useRouter()
 
   const handleSubmit = (values: IFormValues, { resetForm }: { resetForm: () => void }) => { 
     
@@ -157,15 +158,8 @@ export default function SingUp() {
             </View>
           )}
         </Formik>
-        <View >
-          <TouchableOpacity style={styles.button}>
-            <Link href='/' style={{marginLeft: 10}}>
-             <Text style={styles.buttonText}> At Home</Text>
-            </Link>
-          </TouchableOpacity>
-        </View>
+        
       </ScrollView>
-    
     );
   }
 
