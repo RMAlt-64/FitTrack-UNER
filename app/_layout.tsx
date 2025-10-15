@@ -1,14 +1,15 @@
 import { Stack, Slot } from "expo-router";
 import { AuthProvider, useAuth } from "../context/AuthContext";
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
+import { MaterialIcons } from "@expo/vector-icons";
 
 function RootLayoutInner() {
   const { user } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-
+   
   useEffect(() => {
     
     setTimeout(() => {
@@ -36,18 +37,43 @@ function RootLayoutInner() {
       </View>
     );
   }
-  return;
+ 
 
 }
 
 export default function RootLayout() {
+  const { logout } = useAuth();
   return (
     <AuthProvider>
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack screenOptions={{ headerShown: false,
+        gestureEnabled: false 
+       }}>
         
-        <Stack.Screen name="auth" />
-        <Stack.Screen name="home" />
-        <Stack.Screen name="map" />
+        <Stack.Screen name="auth"/>
+        <Stack.Screen name="home" options={{
+          title: "Inicio",
+          headerShown: true,
+          headerStyle: { backgroundColor: "#3A506B" },
+          headerTintColor: "#fff",
+          headerRight: () => (
+            <TouchableOpacity onPress={logout} style={{ marginRight: 15 }}>
+              <MaterialIcons name="logout" size={24} color="#fff" />
+            </TouchableOpacity>
+          ),
+        }}/>
+        <Stack.Screen name="map" options={{
+          title: "Mapa",
+          headerShown: true,
+          headerStyle: { backgroundColor: "#3A506B" },
+          headerTintColor: "#fff",
+          headerRight: () => (
+            <TouchableOpacity onPress={logout} style={{ marginRight: 15 }}>
+              <MaterialIcons name="logout" size={24} color="#fff" />
+            </TouchableOpacity>
+          ),
+        }}/>
+        <Stack.Screen name="record" options={{
+        }}/>
         <Stack.Screen name="camera" />
         <Stack.Screen name="activities" />
         <Stack.Screen name="settings" />

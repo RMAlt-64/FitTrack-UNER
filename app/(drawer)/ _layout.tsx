@@ -2,7 +2,10 @@ import { Drawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 
+
+
 export default function DrawerLayout() {
+  
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
@@ -11,11 +14,13 @@ export default function DrawerLayout() {
           headerTintColor: "#fff",
           drawerActiveTintColor: "#6200ee",
           drawerLabelStyle: { fontSize: 16 },
+          
         }}
       >
         <Drawer.Screen
           name="map"
           options={{
+            headerShown: true,
             drawerLabel: "Mapa",
             title: "Mapa",
             drawerIcon: ({ color, size }) => (
