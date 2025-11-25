@@ -45,7 +45,10 @@ export default function LoginScreen() {
     setIsEnabled(email !== undefined  && password !== undefined);
     
   }, [email,password]);
-
+  
+  const handleRegister = () => {
+      router.push("/auth/register")
+    }
   
   
   return (
@@ -90,10 +93,10 @@ export default function LoginScreen() {
         </View> 
       </View>
       <View >
-        <TouchableOpacity style={styles.button}>
-          <Link href='/home' style={{marginLeft: 10}}>
-              <Text style={styles.buttonText}> At Home</Text>
-          </Link>
+        <TouchableOpacity onPress={handleRegister} style={styles.button} >
+
+              <Text style={styles.buttonText}> Register</Text>
+
         </TouchableOpacity>
       </View>
     </View>

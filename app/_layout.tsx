@@ -72,11 +72,50 @@ export default function RootLayout() {
             </TouchableOpacity>
           ),
         }}/>
-        <Stack.Screen name="record" options={{
+          <Stack.Screen name="walkDetails" options={{
+            title: "Detalles de la caminata",
+            headerShown: true,
+            headerStyle: { backgroundColor: "#3A506B" },
+            headerTintColor: "#fff",
+            headerRight: () => (
+              <TouchableOpacity onPress={logout} style={{ marginRight: 15 }}>
+                <MaterialIcons name="logout" size={24} color="#fff" />
+              </TouchableOpacity>
+            ),
         }}/>
-        <Stack.Screen name="camera" />
-        <Stack.Screen name="activities" />
-        <Stack.Screen name="settings" />
+        <Stack.Screen name="camera" options={{
+          title: "camera",
+          headerShown: true,
+          headerStyle: { backgroundColor: "#3A506B" },
+          headerTintColor: "#fff",
+          headerRight: () => (
+            <TouchableOpacity onPress={logout} style={{ marginRight: 15 }}>
+              <MaterialIcons name="logout" size={24} color="#fff" />
+            </TouchableOpacity>
+          ),
+        }} />
+        <Stack.Screen name="activities" options={{
+          title: "Registro de actividad",
+            headerShown: true,
+            headerStyle: { backgroundColor: "#3A506B" },
+            headerTintColor: "#fff",
+            headerRight: () => (
+              <TouchableOpacity onPress={logout} style={{ marginRight: 15 }}>
+                <MaterialIcons name="logout" size={24} color="#fff" />
+              </TouchableOpacity>
+            ),
+        }}/>
+        <Stack.Screen name="settings" options={{
+          title: "Configuración",
+            headerShown: true,
+            headerStyle: { backgroundColor: "#3A506B" },
+            headerTintColor: "#fff",
+            headerRight: () => (
+              <TouchableOpacity onPress={logout} style={{ marginRight: 15 }}>
+                <MaterialIcons name="logout" size={24} color="#fff" />
+              </TouchableOpacity>
+            ),
+        }}/>
       </Stack>
       <RootLayoutInner/>
     </AuthProvider>

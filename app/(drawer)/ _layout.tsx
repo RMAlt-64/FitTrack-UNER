@@ -18,7 +18,7 @@ export default function DrawerLayout() {
         }}
       >
         <Drawer.Screen
-          name="map"
+          name="settings"
           options={{
             headerShown: true,
             drawerLabel: "Mapa",
@@ -29,9 +29,9 @@ export default function DrawerLayout() {
           }}
         />
         <Drawer.Screen
-          name="record"
+          name="new-post"
           options={{
-            drawerLabel: "Caminar",
+            drawerLabel: "publicar post",
             title: "Registrar Caminata",
             drawerIcon: ({ color, size }) => (
               <MaterialIcons name="directions-walk" size={size} color={color} />

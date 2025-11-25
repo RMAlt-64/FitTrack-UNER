@@ -11,10 +11,13 @@ import LottieView from "lottie-react-native";
 export default function HomeScreen() {
   const router = useRouter();
   const [weather, setWeather] = useState<any>(null);
-  const { user, logout } = useAuth();
+  
   const [loading, setLoading] = useState(true);
 
-  const goTo = (path: string) => router.push(path);
+  type PushArg = Parameters<typeof router.push>[0];
+  const goTo = (path: PushArg) => router.push(path);
+
+  
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -112,6 +115,11 @@ export default function HomeScreen() {
         <TouchableOpacity style={styles.cardButton} onPress={() => goTo("/walkTracker")}>
           <MaterialIcons name="directions-walk" size={40} color="#fff" />
           <Text style={styles.cardText}>Registrar Caminata</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.cardButton} onPress={() => goTo("/walkDetails")}>
+          <MaterialIcons name="person-search"  size={40} color="#fff" />
+          <Text style={styles.cardText}>Detalle de caminata </Text>
         </TouchableOpacity>
       </View>
     </View>
