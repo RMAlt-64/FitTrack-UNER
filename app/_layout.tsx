@@ -5,10 +5,20 @@ import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import { registerForPushNotifications } from "../services/notifications";
+
+
 function RootLayoutInner() {
   const { user } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+  registerForPushNotifications();
+  }, []);
+
+
    
   useEffect(() => {
     
@@ -45,6 +55,7 @@ export default function RootLayout() {
   const { logout } = useAuth();
   return (
     <AuthProvider>
+      
       <Stack screenOptions={{ headerShown: false,
         gestureEnabled: false 
        }}>

@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { getWeather } from "../services/weather";
 import * as Location from "expo-location";
 import LottieView from "lottie-react-native";
+import { sendImmediateNotification, scheduleDailyNotification } from "../services/notifications";
 
 
 export default function HomeScreen() {
@@ -18,6 +19,8 @@ export default function HomeScreen() {
   const goTo = (path: PushArg) => router.push(path);
 
   
+
+
   useEffect(() => {
     (async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -26,7 +29,7 @@ export default function HomeScreen() {
         setLoading(false);
         return;
       }
-
+      
       const location = await Location.getCurrentPositionAsync({});
       const data = await getWeather(
         location.coords.latitude,
@@ -75,7 +78,9 @@ export default function HomeScreen() {
               </Text>
             </View>
           </>
+          
         )}
+         
       </View>
        <View style={styles.header}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -122,7 +127,25 @@ export default function HomeScreen() {
           <Text style={styles.cardText}>Detalle de caminata </Text>
         </TouchableOpacity>
       </View>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", marginVertical:20  }}>
+        <Text style={{ fontSize: 24, marginBottom: 20, color:"#fff" }}>🏋️ FitTrack Notification</Text>
+
+        <TouchableOpacity
+          onPress={() => sendImmediateNotification()}
+          style={{
+            backgroundColor: "#3A506B",
+            padding: 15,
+            borderRadius: 10
+          }}
+        >
+          <Text style={{ color: "white", fontSize: 16 }}>
+            Programar recordatorio de prueba (15s)
+          </Text>
+        </TouchableOpacity>
+        
+      </View>
     </View>
+    
   );
 }
 

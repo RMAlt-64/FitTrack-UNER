@@ -2,7 +2,21 @@ import { Drawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import * as Notifications from "expo-notifications";
 
+// Configuración de cómo aparece la notificación cuando la app está abierta
+Notifications.setNotificationHandler({
+  handleNotification: async () => {
+    const showAlert = true;
+    return {
+      shouldShowBanner: showAlert,
+      shouldShowList: showAlert,
+      shouldPlaySound: true,
+      shouldSetBadge: false,
+    };
+    
+  },
+});
 
 export default function DrawerLayout() {
   

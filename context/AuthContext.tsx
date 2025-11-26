@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
+import { useEffect } from "react";
+import { registerForPushNotifications } from "../services/notifications";
 
 type AuthContextType = {
   user: string | null;
@@ -15,6 +17,9 @@ const AuthContext = createContext<AuthContextType>({
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<string | null>(null);
   
+  useEffect(() => {
+    registerForPushNotifications();
+  }, []);
 
   const login = (username: string) => setUser(username);
   const logout = () => setUser(null);
